@@ -44,7 +44,7 @@ public class EnemyMovement : MonoBehaviour
     private void OnDisable()
     {
         StopAllCoroutines();
-        agent.enabled= false;
+        agent.enabled = false;
     }
     private void Update()
     {
@@ -54,7 +54,7 @@ public class EnemyMovement : MonoBehaviour
             coAttack = StartCoroutine(CoAttack());
         }
 
-        animator.SetBool(hashMove, agent.velocity.magnitude!=0);
+        animator.SetBool(hashMove, agent.velocity.magnitude != 0);
     }
 
 
@@ -84,6 +84,12 @@ public class EnemyMovement : MonoBehaviour
                 targetEntity = FindTarget();
             }
 
+            if (HasTarget && targetEntity.IsDead)
+            {
+                agent.isStopped = true;
+                break;
+            }
+
             if (HasTarget)
             {
                 rb.Sleep();
@@ -93,7 +99,6 @@ public class EnemyMovement : MonoBehaviour
 
             yield return new WaitForSeconds(pathFindInterval);
         }
-
     }
 
     private IEnumerator CoAttack()

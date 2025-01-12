@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Player : LivingEntity
 {
     public Image hpBar;
+    public GameObject restart;
 
     private PlayerMovement movement;
 
@@ -16,6 +17,8 @@ public class Player : LivingEntity
     {
         movement = GetComponent<PlayerMovement>();
         animator = GetComponent<Animator>();
+
+        restart.SetActive(false);
     }
 
     public override void OnDamage(float damage, Vector3 hitPoint, Vector3 hitNormal)
@@ -32,4 +35,12 @@ public class Player : LivingEntity
         animator.SetTrigger(hashIsDead);
     }
 
+    public void RestartLevel()
+    {
+        restart.SetActive(true);
+    }
+
+    public void OnRestart()
+    {
+    }
 }

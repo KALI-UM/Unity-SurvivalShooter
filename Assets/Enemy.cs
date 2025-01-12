@@ -59,8 +59,7 @@ public class Enemy : LivingEntity
                 yield return null;
             }
 
-            transform.position = newPosition;
-            
+            transform.position = newPosition;    
             onReturn?.Invoke();
         }
     }
